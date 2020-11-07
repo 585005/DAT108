@@ -16,36 +16,36 @@ pageEncoding="ISO-8859-1"%>
 </head>
 <body>
 	<h2>Registration</h2>
-	<form action="RegistrationServlet" method="post" class="pure-form pure-form-aligned">
+	<form name="myForm" action="RegistrationServlet" method="post" class="pure-form pure-form-aligned">
 		<fieldset>
 		
 			<div class="pure-control-group">
-				<label for="firstname">Firstname:</label> <input type="text"
+				<label for="firstname">Firstname:</label> <input type="text" id="f" onchange="validateFirstname();"
 					name="firstname" value="${form.firstname}" /> 
 					
 					<font color="red">${form.firstnameError}</font>
 			</div>
 			<div class="pure-control-group">
-				<label for="lastname">Lastname:</label> <input type="text"
+				<label for="lastname">Lastname:</label> <input type="text" id="l" onchange="validateLastname();"
 					name="lastname" value="${form.lastname}" /> 
 					
 					<font color="red">${form.lastnameError}</font>
 			</div>
 			<div class="pure-control-group">
-				<label for="phone">Phone number (8 digits):</label> <input type="text"
+				<label for="phone">Phone number (8 digits):</label> <input type="text" id="pn" onchange="validatePhone();"
 					name="phone" value="${form.phone}" /> 
 					
 					<font color="red">${form.phoneError}</font>
 			</div>
 			<div class="pure-control-group">
-				<label for="password">Password:</label> <input type="password"
+				<label for="password">Password:</label> <input type="password" id="pw" onchange="validatePassword();"
 					name="password" value="${form.password}" /> 
 					
 					<font color="red">${form.passwordError}</font>
 			</div>
 			<div class="pure-control-group">
 				<label for="repeatPassword">Repeat password:</label> <input
-					type="password" name="repeatPassword"
+					type="password" id="rpw" onchange="validateRepeatPassword();" name="repeatPassword"
 					value="${form.repeatPassword}" /> 
 					
 					<font color="red">${form.repeatPasswordError}</font>
