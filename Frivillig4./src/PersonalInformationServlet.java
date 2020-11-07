@@ -25,6 +25,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	
 	 
 	
+	
 
 			Cookie cookie1 = new Cookie("firstname", URLEncoder.encode(firstname, "ISO-8859-1"));
 			Cookie cookie2 = new Cookie("lastname", URLEncoder.encode(lastname, "ISO-8859-1"));
