@@ -1,11 +1,16 @@
 package no.hvl.dat108;
 
+import java.util.List;
 import java.util.regex.*;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class Validator {
+	
+	@EJB 
+	private static UserDAO userDAO;
 	
 
 	public static boolean createSession(HttpServletRequest request, int time) {
@@ -73,11 +78,12 @@ public class Validator {
 	
 	public static boolean validatePhone(String phone) {
 		int p = phone.length();
-		if(onlyDigits(phone) && p == 8) {
+		if(onlyDigits(phone) && p == 8 && userDAO.checkUniquePhone(phone)) {
 			return true;
 		}
 		return false;
 	}
+	
 	
 	public static boolean validateFirstname(String firstname) {
 		int f = firstname.length();

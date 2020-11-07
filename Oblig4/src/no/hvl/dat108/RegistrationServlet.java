@@ -53,7 +53,7 @@ public class RegistrationServlet extends HttpServlet {
 			
 			User newUser = new User(firstname, lastname, phone, password, gender);
 			
-			//userDAO.createNewUser(newUser);
+			userDAO.createNewUser(newUser);
 			
 			Validator.finishSession(request);
 			
