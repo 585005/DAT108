@@ -18,7 +18,7 @@ public class UserDAO {
 	}
 	
 	public boolean checkUniquePhone(String phone){
-		List<User> list = em.createNamedQuery("SELECT phone FROM oblig4.user1 b", User.class).getResultList();
+		List<User> list = em.createNamedQuery("SELECT b FROM oblig4.user1 b", User.class).getResultList();
 		
 		for(User s : list) {
 			if(s.getPhone().equals(phone)) {
