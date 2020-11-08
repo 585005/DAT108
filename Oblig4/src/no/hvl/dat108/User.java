@@ -6,9 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "oblig4")
+@Table(schema = "oblig4", name= "user1")
 public class User {
-
 	String firstname;
 	String lastname;
     @Id
@@ -16,9 +15,9 @@ public class User {
     @Embedded
     private Password password;
     
-    private Gender gender;
+    private String gender;
     
-	public User(String firstname, String lastname, String phone, Password password, Gender gender) {
+	public User(String firstname, String lastname, String phone, Password password, String gender) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phone = phone;
@@ -28,7 +27,7 @@ public class User {
 	
 	public User() {}
 	
-	public User(String firstname, String lastname, String phone, Gender gender) {
+	public User(String firstname, String lastname, String phone, String gender) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phone = phone;
@@ -55,11 +54,11 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -75,4 +74,6 @@ public class User {
 	public String toString() {
 		return "Users [phonenumber=" + phone + ", password=" + password + "]";
 	}
+
+	
 }

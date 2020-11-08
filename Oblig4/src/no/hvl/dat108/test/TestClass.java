@@ -30,11 +30,13 @@ class TestClass {
 		
 	}
 	
+	/*
 	@Test 
 	void validatePhoneTest() {
 		assertEquals(true, Validator.validatePhone("12345678"));
 		
 	}
+	*/
 	
 	@Test 
 	void validateStringTest() {

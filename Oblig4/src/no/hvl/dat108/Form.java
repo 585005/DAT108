@@ -14,21 +14,22 @@ public class Form {
 	private String passwordError;
 	private String repeatPassword;
 	private String repeatPasswordError;
-	private Gender gender;
+	private String gender;
 	private String genderError;
+	private UserDAO userDAO;
 	
-	public Form(String firstname, String lastname, String phone, String password, String repeatPassword, Gender gender) {
+	public Form(String firstname, String lastname, String phone, String password, String repeatPassword, String gender, UserDAO userDAO) {
 		this.firstname = firstname;
-		System.out.println(firstname);
 		this.lastname = lastname;
 		this.phone = phone;
 		this.password = password;
 		this.repeatPassword = repeatPassword;
 		this.gender = gender;
+		this.userDAO = userDAO;
 	}
 	
 	public boolean isAllInputValid() {
-		return Validator.validateInput(firstname, lastname, phone, password, repeatPassword, gender);
+		return Validator.validateInput(firstname, lastname, phone, password, repeatPassword, gender, userDAO);
 	}
 	
 	public void findError() {
@@ -40,7 +41,7 @@ public class Form {
 			lastname = "";
 			lastnameError = "Invalid lastname";
 		}
-		if(!Validator.validatePhone(phone)) {
+		if(!Validator.validatePhone(phone, userDAO)) {
 			phone = "";
 			phoneError = "invalid phonenumber";
 		}
@@ -137,7 +138,7 @@ public class Form {
 	public void setRepeatPasswordError(String repeatPasswordError) {
 		this.repeatPasswordError = repeatPasswordError;
 	}
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
 	public String getGenderError() {

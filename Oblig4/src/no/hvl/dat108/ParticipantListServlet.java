@@ -2,7 +2,10 @@ package no.hvl.dat108;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -25,29 +28,19 @@ public class ParticipantListServlet extends HttpServlet {
 			response.sendRedirect("LoginServlet");
 			
 		}else {
-
-			/*
-			User user1 = new User("Emilie", "Hinna", "47520188", Gender.FEMALE);
-			User user2 = new User("Alvin", "Gusfre", "45272739", Gender.MALE);
-			User user3 = new User("Øyvind", "Espetvedt", "12345678", Gender.MALE);
-			
-		List<User> list = new ArrayList<User>();
-		
-		list.add(user1);
-		list.add(user2);
-		list.add(user3);
-		*/
 		
 		List<User> list = userDAO.getAllUsers();
+		list = sortUsers(list);
+
 		
 		request.getSession().setAttribute("list", list);
-			
-		
 		request.getRequestDispatcher("WEB-INF/participantList.jsp").forward(request, response);
 		}
 	}
 
-	
+	private List<User> sortUsers(List<User> userList){
+        return userList.stream().sorted(Comparator.comparing(User::getFirstname).thenComparing(User::getLastname)).collect(Collectors.toList());
+    }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

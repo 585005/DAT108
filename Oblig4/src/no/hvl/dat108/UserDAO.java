@@ -14,26 +14,26 @@ public class UserDAO {
     private EntityManager em;
 	
 	public List<User> getAllUsers() {
-		return em.createQuery("SELECT b FROM oblig4.user1 b", User.class).getResultList();
+		return em.createQuery("SELECT b FROM User b", User.class).getResultList();
 	}
 	
 	public boolean checkUniquePhone(String phone){
-		List<User> list = em.createNamedQuery("SELECT b FROM oblig4.user1 b", User.class).getResultList();
+		List<User> list = em.createQuery("SELECT b FROM User b", User.class).getResultList();
 		
 		for(User s : list) {
 			if(s.getPhone().equals(phone)) {
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 			
 	}
 	
-	public User getUser(String name) {
+	public synchronized User getUser(String name) {
 		return em.find(User.class, name);
 	}
 
-	public void createNewUser(User newUser) {
+	public synchronized void createNewUser(User newUser) {
 		em.persist(newUser);
 	}
 }

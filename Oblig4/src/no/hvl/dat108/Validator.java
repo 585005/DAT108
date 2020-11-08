@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class Validator {
 	
-	@EJB 
-	private static UserDAO userDAO;
+
 	
 
 	public static boolean createSession(HttpServletRequest request, int time) {
@@ -42,9 +41,9 @@ public class Validator {
 		
 	}
 	
-	public static boolean validateInput(String firstname, String lastname, String phone, String password, String repeatPassword, Gender gender) {		
+	public static boolean validateInput(String firstname, String lastname, String phone, String password, String repeatPassword, String gender, UserDAO userDAO) {		
 		
-		if(validateFirstname(firstname) && validateLastname(lastname) && validatePhone(phone)
+		if(validateFirstname(firstname) && validateLastname(lastname) && validatePhone(phone, userDAO)
 				&& validatePassword(password) && validateRepeatPassword(password, repeatPassword) && validateGender(gender)) {
 			
 			return true;
@@ -53,7 +52,7 @@ public class Validator {
 		return false;
 	}
 	
-	public static boolean validateGender(Gender gender) {
+	public static boolean validateGender(String gender) {
 	
 		if(gender!=null) {
 			return true;
@@ -76,7 +75,7 @@ public class Validator {
 		return false;
 	}
 	
-	public static boolean validatePhone(String phone) {
+	public static boolean validatePhone(String phone, UserDAO userDAO) {
 		int p = phone.length();
 		if(onlyDigits(phone) && p == 8 && userDAO.checkUniquePhone(phone)) {
 			return true;

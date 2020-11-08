@@ -26,6 +26,8 @@ public class RegistrationServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	
+		
 		String firstname = Validator.escapeHtml(request.getParameter("firstname"));
 		String lastname = Validator.escapeHtml(request.getParameter("lastname"));
 		String phone = Validator.escapeHtml(request.getParameter("phone"));
@@ -33,18 +35,18 @@ public class RegistrationServlet extends HttpServlet {
 		String repeatPassword = Validator.escapeHtml(request.getParameter("repeatPassword"));
 		String genderString = Validator.escapeHtml(request.getParameter("gender"));
 		
-		Gender gender = null;
+		String gender = null;
 		
 		if(genderString.equals("male")) {
-			gender = Gender.MALE;
+			gender = "MALE";
 		}
 		
 		else if(genderString.equals("female")) {
-			gender = Gender.FEMALE;
+			gender = "FEMALE";
 		}
 		
 		
-		Form form = new Form(firstname, lastname, phone, pass, repeatPassword, gender);
+		Form form = new Form(firstname, lastname, phone, pass, repeatPassword, gender, userDAO);
 		
 		if(form.isAllInputValid()) {
 			
@@ -54,6 +56,8 @@ public class RegistrationServlet extends HttpServlet {
 			User newUser = new User(firstname, lastname, phone, password, gender);
 			
 			userDAO.createNewUser(newUser);
+			
+			//userDAO.getAllUsers().forEach(System.out::println);
 			
 			Validator.finishSession(request);
 			
